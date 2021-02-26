@@ -1,0 +1,30 @@
+#! /bin/bash
+
+# install the dot files
+
+export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/sbin
+
+echo "trying to install all of our dotfiles...."
+
+# make it idempotent!!!
+
+# bash
+cp bash_aliases ~/.bash_aliases
+
+# zsh stuff
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+cp zshrc ~/.zshrc
+cp jkblinks.zsh-theme ~/.oh-my-zsh/themes/.
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+# python
+cp pythonrc ~/.pythonrc
+
+echo "============================================="
+echo "stuff you need to make sure is installed:"
+echo "zsh"
+echo "zsh-syntax-highlighting"
+echo "i3"
+echo "tmux screen"
+echo "vim"
+echo "============================================="
