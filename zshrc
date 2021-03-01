@@ -42,7 +42,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-export PYTHONSTARTUP=/home/knerr/.pythonrc
+export PYTHONSTARTUP=${HOME}/.pythonrc
 export EDITOR="vim"
 export VISUAL="vim"
 export HISTSIZE=3500

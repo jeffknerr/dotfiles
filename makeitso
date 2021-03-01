@@ -4,7 +4,7 @@
 
 export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/sbin
 
-echo "trying to install all of our dotfiles...."
+echo "trying to install all of my dotfiles...."
 
 # make it idempotent!!!
 
@@ -20,11 +20,16 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 # python
 cp pythonrc ~/.pythonrc
 
+# mutt
+mkdir -p ~/mdir/tmp
+cp muttrc ~/.muttrc
+
+stuff="zsh zsh-syntax-highlighting i3 tmux screen rsync git "\
+"ssh-askpass vim mutt vim extra-vim-stuff enscript"
+
 echo "============================================="
-echo "stuff you need to make sure is installed:"
-echo "zsh"
-echo "zsh-syntax-highlighting"
-echo "i3"
-echo "tmux screen"
-echo "vim"
+echo "stuff you probably want installed:"
+echo $stuff
+echo "============================================="
+echo "sudo apt-get install $stuff"
 echo "============================================="

@@ -1,0 +1,152 @@
+# i3 config file (v4)
+set $mod Mod1
+
+# font for window titles. ISO 10646 = Unicode
+font -misc-fixed-bold-r-normal--13-120-75-75-C-70-iso10646-1
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec gnome-terminal
+
+# kill focused window
+bindsym $mod+Shift+Q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+
+# change focus
+bindsym $mod+Shift+H focus left
+bindsym $mod+Shift+J focus down
+bindsym $mod+Shift+K focus up
+bindsym $mod+Shift+L focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, default)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout default
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+exclam move workspace 1
+bindsym $mod+Shift+at move workspace 2
+bindsym $mod+Shift+numbersign move workspace 3
+bindsym $mod+Shift+dollar move workspace 4
+bindsym $mod+Shift+percent move workspace 5
+bindsym $mod+Shift+asciicircum move workspace 6
+bindsym $mod+Shift+ampersand move workspace 7
+bindsym $mod+Shift+asterisk move workspace 8
+bindsym $mod+Shift+parenleft move workspace 9
+bindsym $mod+Shift+parenright move workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+C reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+R restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+E exit
+
+# Start i3bar to display a workspace bar 
+bar {
+     status_command i3status
+     colors {
+        background #000000
+        statusline #ffffff
+        separator #6666aa
+
+        focused_workspace  #4c7899 #ff6600 #222222
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+     }
+}
+
+bindsym $mod+F11 exec "/usr/bin/ssh-add ${HOME}/.ssh/id_ed25519 </dev/null"
+bindsym $mod+F12 exec "~/bin/randomBackground; feh --bg-scale ~/.back.jpg"
+# use xprop to find the class or instance names
+for_window [class="Xpdf"] floating enable
+for_window [class="mplayer"] floating enable
+for_window [class="Geeqie"] floating enable
+for_window [instance="gimp"] floating enable
+for_window [instance="Fai-monitor-gui"] floating enable
+for_window [instance="libreoffice"] floating enable
+for_window [instance="VirtualBox"] floating enable
+for_window [instance="Oracle VM VirtualBox Manager"] floating enable
+for_window [instance="Qt-subapplication"] floating enable
+for_window [instance="MATLAB R2014a"] floating enable
+for_window [instance="MATLAB"] floating enable
+for_window [instance="com-mathworks-util-PostVMInit"] floating enable
+for_window [instance="sun-awt-X11-XFramePeer"] floating enable
+for_window [instance="emacs"] floating enable
+for_window [instance="Emacs24"] floating enable
+for_window [class="Toplevel"] floating enable
+for_window [class="emulator64-arm"] floating enable
+for_window [class="tk"] floating enable
+for_window [class="Tk"] floating enable
+for_window [class="Python Turtle Graphics"] floating enable
+for_window [instance="P A C M A N"] floating enable
+for_window [instance="pm.py"] floating enable
+for_window [instance="gazeb"] floating enable
+for_window [instance="Gazeb"] floating enable
+for_window [class="SshAskpass"] resize set 500 200
+for_window [class="Gnuplot"] floating enable
+for_window [class="gnuplot"] floating enable
+for_window [class="Unity"] floating enable
+for_window [instance="ImageMagick"] floating enable
+for_window [instance="display"] floating enable
+#
+# autostart stuff
+exec xscreensaver -nosplash
+bindsym $mod+o exec xscreensaver-command --lock 
+bindsym $mod+b exec firefox
+bindsym $mod+x exec xterm
+
+assign [class="^chromium-browser$"] 2
+assign [class="^gnome-terminal$"] 1
+exec firefox
+exec gnome-terminal
+exec "feh --bg-scale ~/.back.jpg"
+exec "redshift -o -l 0:0 -b 0.7 -t 6500:6500"
+
+##############################################################
+# class                 border  backgr. text    indicator
+#client.focused          #E8A317 #E8A317 #000000 #2e9ef4
+client.focused          #777777 #777777 #000000 #2e9ef4
+##############################################################

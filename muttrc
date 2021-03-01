@@ -1,0 +1,41 @@
+#
+# .muttrc
+#
+set hostname=cs.swarthmore.edu
+set use_domain
+set check_mbox_size
+set folder = ~/mdir               # where all the mail folders are
+set delete = yes                  # purge deleted messages without asking
+set edit_hdrs                     # let me edit headers when composing
+set copy = yes                    # always save a copy of outgoing messages
+set record = +sent                # location to save outgoing messages
+set indent_str = ">>"             # how to indent replied text
+set print_cmd = "enscript -2rhj"  # command to print messages
+set print=ask-yes                 # default answer for print command
+#set signature = "~/.sig"          # file containing signature (include automatically)
+set sort = threads                # primary sorting method
+set sort_aux = last-date-received # moves old thread with new msgs to front/bottom 
+set tmpdir = ~/mdir/tmp           # where to store temp files
+#
+#
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+set implicit_autoview=no
+#
+color header magenta black ^(From|Subject):
+color header red     black "Date: "
+# bold the new and old (but unread) msgs
+color index white black        '~N|~O'
+### Need to uncolor deletions first to make the next rule universal
+uncolor index '~D'
+color index yellow     black   '~D'
+#
+# spam trick: all messages in folder marked for deletion 
+# upon entering the folder...just glance at the headers and
+# move on...
+folder-hook IN.SPAM push 'D.\n'
+folder-hook Trash push 'D.\n'
+folder-hook aaa.IN.SUDO push 'D.\n'
+#
+set pager_index_lines=4   # number of lines to see from the index
+set mime_forward=ask-no

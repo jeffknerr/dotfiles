@@ -1,0 +1,11 @@
+[user]
+	name = Your Name
+	email = your@email.address
+[core]
+	editor = vim
+[color]
+	ui = auto
+[push]
+	default = simple
+[alias]
+	unadd = reset HEAD
