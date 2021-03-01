@@ -4,28 +4,54 @@
 
 export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/sbin
 
-echo "trying to install all of my dotfiles...."
+echo "installing dotfiles...."
 
 # make it idempotent!!!
 
+# function to ask: replace [y/n]? 
+cprpl () {
+  src=$1
+  dst=$2
+  if [ -e $dst ] ; then
+    echo "$dst already exists...replace it?"
+    read -r -p "[y/n] " response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+      rm -f $dst     # note: dst needs to be full path, not just dir/.
+      cp $src $dst
+    else
+      echo "ok...leaving $dst as is..."
+    fi
+  else
+    cp $src $dst
+  fi 
+}
+
 # bash
-cp bash_aliases ~/.bash_aliases
+cprpl bash_aliases ~/.bash_aliases
 
 # zsh stuff
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-cp zshrc ~/.zshrc
-cp jkblinks.zsh-theme ~/.oh-my-zsh/themes/.
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+# check if ~/.oh-my-zsh already exists...
+if [ ! -e ${HOME}/.oh-my-zsh ] ; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+cprpl zshrc ~/.zshrc
+cprpl jkblinks.zsh-theme ~/.oh-my-zsh/themes/jkblinks.zsh
+if [ ! -e ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] ; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+fi
 
 # python
-cp pythonrc ~/.pythonrc
+cprpl pythonrc ~/.pythonrc
 
 # mutt
 mkdir -p ~/mdir/tmp
-cp muttrc ~/.muttrc
+cprpl muttrc ~/.muttrc
 
 stuff="zsh zsh-syntax-highlighting i3 tmux screen rsync git "\
-"ssh-askpass vim mutt vim extra-vim-stuff enscript"
+"ssh-askpass vim mutt vim enscript"
+
+# vundle???
+#  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo "============================================="
 echo "stuff you probably want installed:"
