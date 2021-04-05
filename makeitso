@@ -38,7 +38,7 @@ cprpl () {
   fi 
 }
 
-stuff="zsh zsh-syntax-highlighting tmux screen rsync "\
+stuff="curl zsh zsh-syntax-highlighting tmux screen rsync "\
 "git vim mutt enscript"
 echo "============================================="
 echo "stuff you probably want installed:"

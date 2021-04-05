@@ -16,6 +16,7 @@ cd dotfiles
 
 ## TODO
 
+- fix echo line lines (function?)
 - muttrc? have script customize things??
 - have script make backup copies instead of replace??
 - finish the script to install all of this
