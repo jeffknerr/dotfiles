@@ -21,6 +21,7 @@ askyn () {
 }
 
 # function to ask: replace [y/n]? 
+# make a backup copy???
 cprpl () {
   src=$1
   dst=$2
@@ -38,7 +39,7 @@ cprpl () {
 }
 
 stuff="zsh zsh-syntax-highlighting tmux screen rsync "\
-"git vim mutt vim enscript"
+"git vim mutt enscript"
 echo "============================================="
 echo "stuff you probably want installed:"
 echo $stuff
@@ -98,6 +99,10 @@ cprpl authorized_keys ${HOME}/.ssh/authorized_keys
 echo "============================================="
 cprpl vimrc ~/.vimrc
 echo "might have to run :PlugInstall to get all the vim plugins"
+
+# tmux.conf
+echo "============================================="
+cprpl tmux.conf ~/.tmux.conf
 
 echo ""
 echo "---- all done! ----"

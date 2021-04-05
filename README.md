@@ -17,5 +17,6 @@ cd dotfiles
 ## TODO
 
 - muttrc? have script customize things??
+- have script make backup copies instead of replace??
 - finish the script to install all of this
 - *really* test it
