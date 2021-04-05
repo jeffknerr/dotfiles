@@ -29,7 +29,7 @@ cprpl () {
 # bash
 cprpl bash_aliases ~/.bash_aliases
 
-# zsh stuff
+# zsh stuff (need zsh installed first??)
 # check if ~/.oh-my-zsh already exists...
 if [ ! -e ${HOME}/.oh-my-zsh ] ; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -40,6 +40,7 @@ if [ ! -e ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] ; then
 fi
 cprpl jkblinks.zsh-theme ~/.oh-my-zsh/themes/jkblinks.zsh-theme
 if [ ${SHELL} != "/usr/bin/zsh" ] ; then
+  echo "changing shell to zsh..."
   chsh -s /usr/bin/zsh
 fi
 
