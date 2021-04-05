@@ -44,12 +44,19 @@ fi
 cprpl pythonrc ~/.pythonrc
 
 # mutt
-mkdir -p ~/mdir/tmp
+if [ ! -e ${HOME}/mdir/tmp ] ; then
+  mkdir -p ~/mdir/tmp
+fi
 cprpl muttrc ~/.muttrc
+
+# ssh auth keys file
+if [ ! -e ${HOME}/.ssh ] ; then
+  mkdir ${HOME}/.ssh
+fi
+cprpl authorized_keys ${HOME}/.ssh/authorized_keys
 
 stuff="zsh zsh-syntax-highlighting i3 tmux screen rsync git "\
 "ssh-askpass vim mutt vim enscript"
-
 # vundle???
 #  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 

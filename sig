@@ -1,7 +1,6 @@
 
 ** Jeffrey M. Knerr            System Administrator
-** Computer Science Dept.      Phone: XXX-YYY-ZZZZ
-** Swarthmore College          Email: user@domain.com 
-** 500 College Avenue          Pronouns: he/him
-** Swarthmore, PA 19081        
+** place of work.........      Phone: XXX-YYY-ZZZZ
+** address line 1              Email: user@domain.com 
+** City, STATE zipcode         Pronouns: he/him
 
