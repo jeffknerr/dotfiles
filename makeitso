@@ -39,6 +39,9 @@ if [ ! -e ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 fi
 cprpl jkblinks.zsh-theme ~/.oh-my-zsh/themes/jkblinks.zsh
+if [ ${SHELL} != "/usr/bin/zsh"] ; then
+  chsh -s /usr/bin/zsh
+fi
 
 # python
 cprpl pythonrc ~/.pythonrc
@@ -64,6 +67,8 @@ echo "============================================="
 echo "stuff you probably want installed:"
 echo $stuff
 echo "============================================="
-echo "sudo apt-get install $stuff"
-echo "also might want...sudo apt-get install i3"
+echo ">> sudo apt-get install $stuff"
+echo "============================================="
+echo "also might want i3?"
+echo ">> sudo apt-get install i3"
 echo "============================================="
