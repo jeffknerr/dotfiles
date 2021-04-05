@@ -38,7 +38,7 @@ cprpl zshrc ~/.zshrc
 if [ ! -e ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 fi
-cprpl jkblinks.zsh-theme ~/.oh-my-zsh/themes/jkblinks.zsh
+cprpl jkblinks.zsh-theme ~/.oh-my-zsh/themes/jkblinks.zsh-theme
 if [ ${SHELL} != "/usr/bin/zsh"] ; then
   chsh -s /usr/bin/zsh
 fi
