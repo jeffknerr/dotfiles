@@ -16,7 +16,6 @@ cd dotfiles
 
 ## TODO
 
-- vimrc: vundle stuff
-- muttrc?
-- finish script to install all of them
+- muttrc? have script customize things??
+- finish the script to install all of this
 - *really* test it

@@ -138,7 +138,8 @@ bindsym $mod+o exec xscreensaver-command --lock
 bindsym $mod+b exec firefox
 bindsym $mod+x exec xterm
 
-assign [class="^chromium-browser$"] 2
+#assign [class="^chromium-browser$"] 2
+assign [class="^firefox$"] 2
 assign [class="^gnome-terminal$"] 1
 exec firefox
 exec gnome-terminal

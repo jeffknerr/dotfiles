@@ -87,6 +87,10 @@ if [ ! -e ${HOME}/.ssh ] ; then
 fi
 cprpl authorized_keys ${HOME}/.ssh/authorized_keys
 
-# vimrc
-# vundle???
-# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# vimrc, vim-plug
+cprpl vimrc ~/.vimrc
+echo "might have to run :PlugInstall to get all the vim plugins"
+
+echo ""
+echo "---- all done! ----"
+echo ""
