@@ -37,8 +37,8 @@ cprpl () {
   fi 
 }
 
-stuff="zsh zsh-syntax-highlighting tmux screen rsync git "\
-"ssh-askpass vim mutt vim enscript"
+stuff="zsh zsh-syntax-highlighting tmux screen rsync "\
+"git vim mutt vim enscript"
 echo "============================================="
 echo "stuff you probably want installed:"
 echo $stuff
@@ -48,24 +48,28 @@ then
   sudo apt-get install $stuff
 fi
 echo "============================================="
-echo "you also might want i3..."
-if askyn "run sudo apt-get install i3?";
+echo "you also might want i3 ssh-askpass..."
+if askyn "run sudo apt-get install i3 ssh-askpass?";
 then
-  sudo apt-get install i3
+  sudo apt-get install i3 ssh-askpass
 fi
 echo "============================================="
 
 # bash
+echo "============================================="
 cprpl bash_aliases ~/.bash_aliases
 
 # check if ~/.oh-my-zsh already exists...
+echo "============================================="
 if [ ! -e ${HOME}/.oh-my-zsh ] ; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
+echo "============================================="
 cprpl zshrc ~/.zshrc
 if [ ! -e ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 fi
+echo "============================================="
 cprpl jkblinks.zsh-theme ~/.oh-my-zsh/themes/jkblinks.zsh-theme
 if [ ${SHELL} != "/usr/bin/zsh" ] ; then
   echo "changing shell to zsh..."
@@ -73,21 +77,25 @@ if [ ${SHELL} != "/usr/bin/zsh" ] ; then
 fi
 
 # python
+echo "============================================="
 cprpl pythonrc ~/.pythonrc
 
 # mutt
 if [ ! -e ${HOME}/mdir/tmp ] ; then
   mkdir -p ~/mdir/tmp
 fi
+echo "============================================="
 cprpl muttrc ~/.muttrc
 
 # ssh auth keys file
 if [ ! -e ${HOME}/.ssh ] ; then
   mkdir ${HOME}/.ssh
 fi
+echo "============================================="
 cprpl authorized_keys ${HOME}/.ssh/authorized_keys
 
 # vimrc, vim-plug
+echo "============================================="
 cprpl vimrc ~/.vimrc
 echo "might have to run :PlugInstall to get all the vim plugins"
 
