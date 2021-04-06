@@ -1,7 +1,7 @@
 #
 # .muttrc
 #
-set hostname=cs.swarthmore.edu
+set hostname=EMAILHOSTNAME
 set use_domain
 set check_mbox_size
 set folder = ~/mdir               # where all the mail folders are

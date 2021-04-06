@@ -11,13 +11,13 @@ other actions that might be needed:
 ```
 git clone git@github.com:jeffknerr/dotfiles.git
 cd dotfiles
+cp .defaults defaults
+vim defaults
 ./makeitso
 ```
 
 ## TODO
 
-- fix echo line lines (function?)
-- muttrc? have script customize things??
-- have script make backup copies instead of replace??
+- sig customizations???
 - finish the script to install all of this
 - *really* test it

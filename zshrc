@@ -67,3 +67,6 @@ function polo () { cd $MPDIR; }
 export WORKON_HOME=$HOME/venvs
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#446644,bg=black,underline"
+
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"

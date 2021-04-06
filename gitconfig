@@ -1,6 +1,6 @@
 [user]
-	name = Your Name
-	email = your@email.address
+	name = NAME
+	email = EMAIL
 [core]
 	editor = vim
 [color]

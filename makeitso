@@ -1,12 +1,15 @@
 #! /bin/bash
 
-# install the dot files
+# install the dot files and packages needed
+# J. Knerr
+# April 2021
 
 export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/sbin
 
-echo "installing dotfiles...."
-
-# make it idempotent!!!
+# just so the lines are all the same
+echoline () {
+  echo "============================================="
+}
 
 # ask y/n question, return true/false
 askyn () {
@@ -21,14 +24,15 @@ askyn () {
 }
 
 # function to ask: replace [y/n]? 
-# make a backup copy???
 cprpl () {
   src=$1
   dst=$2
   if [ -e $dst ] ; then
     if askyn "$dst already exists...replace it?";
     then
-      rm -f $dst     # note: dst needs to be full path, not just dir/.
+      d=`date +"%Y%m%d-%H%M%S"`
+      # note: dst needs to be full path, not just dir/.
+      mv $dst ${dst}-backup.${d}  
       cp $src $dst
     else
       echo "ok...leaving $dst as is..."
@@ -38,71 +42,104 @@ cprpl () {
   fi 
 }
 
+echo "installing dotfiles and software...."
+
 stuff="curl zsh zsh-syntax-highlighting tmux screen rsync "\
 "git vim mutt enscript"
-echo "============================================="
+
+echoline
 echo "stuff you probably want installed:"
 echo $stuff
-echo "============================================="
+echoline
 if askyn "run sudo apt-get install?";
 then
   sudo apt-get install $stuff
 fi
-echo "============================================="
-echo "you also might want i3 ssh-askpass..."
-if askyn "run sudo apt-get install i3 ssh-askpass?";
+echoline
+echo "you also might want i3 ssh-askpass feh redshift..."
+if askyn "run sudo apt-get install i3 ssh-askpass feh redshift?";
 then
-  sudo apt-get install i3 ssh-askpass
+  sudo apt-get install i3 ssh-askpass feh redshift
 fi
-echo "============================================="
+echoline
 
 # bash
-echo "============================================="
+echoline
 cprpl bash_aliases ~/.bash_aliases
 
 # check if ~/.oh-my-zsh already exists...
-echo "============================================="
+echoline
 if [ ! -e ${HOME}/.oh-my-zsh ] ; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
-echo "============================================="
+echoline
 cprpl zshrc ~/.zshrc
 if [ ! -e ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 fi
-echo "============================================="
+echoline
 cprpl jkblinks.zsh-theme ~/.oh-my-zsh/themes/jkblinks.zsh-theme
 if [ ${SHELL} != "/usr/bin/zsh" ] ; then
   echo "changing shell to zsh..."
   chsh -s /usr/bin/zsh
 fi
+# for jekyll stuff
+if [ ! -e ${HOME}/gems ] ; then
+  mkdir ${HOME}/gems
+fi
 
 # python
-echo "============================================="
+echoline
 cprpl pythonrc ~/.pythonrc
 
 # mutt
 if [ ! -e ${HOME}/mdir/tmp ] ; then
   mkdir -p ~/mdir/tmp
 fi
-echo "============================================="
+echoline
 cprpl muttrc ~/.muttrc
 
 # ssh auth keys file
 if [ ! -e ${HOME}/.ssh ] ; then
   mkdir ${HOME}/.ssh
 fi
-echo "============================================="
+echoline
 cprpl authorized_keys ${HOME}/.ssh/authorized_keys
 
 # vimrc, vim-plug
-echo "============================================="
+echoline
 cprpl vimrc ~/.vimrc
 echo "might have to run :PlugInstall to get all the vim plugins"
 
 # tmux.conf
-echo "============================================="
+echoline
 cprpl tmux.conf ~/.tmux.conf
+
+# signature file
+echoline
+cprpl sig ~/.sig
+
+# gitconfig file
+echoline
+cprpl gitconfig ~/.gitconfig
+
+# if defaults file exists, fix the default name, username, etc
+echoline
+if [ ! -e defaults ] ; then
+  echo "found defaults file...fixing default stuff"
+  name=`grep -w name defaults| awk -F: '{print $2}'`
+  email=`grep -w email defaults| awk -F: '{print $2}'`
+  emailhostname=`grep -w emailhostname defaults| awk -F: '{print $2}'`
+  # fix gitconfig
+  sed -i 's/NAME/$name/g' ~/.gitconfig
+  sed -i 's/EMAIL/$email/g' ~/.gitconfig
+  # fix sig
+  sed -i 's/NAME/$name/g' ~/.sig
+  sed -i 's/EMAIL/$email/g' ~/.sig
+  echo "----> you may want to further edit the .sig file..."
+  # fix muttrc
+  sed -i 's/EMAILHOSTNAME/$emailhostname/g' ~/.sig
+fi
 
 echo ""
 echo "---- all done! ----"
