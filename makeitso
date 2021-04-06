@@ -131,14 +131,14 @@ if [ -e defaults ] ; then
   email=`grep -w email defaults| awk -F: '{print $2}'`
   emailhostname=`grep -w emailhostname defaults| awk -F: '{print $2}'`
   # fix gitconfig
-  sed -i 's/NAME/$name/g' ~/.gitconfig
-  sed -i 's/EMAIL/$email/g' ~/.gitconfig
+  sed -i "s/NAME/$name/g" ~/.gitconfig
+  sed -i "s/EMAIL/$email/g" ~/.gitconfig
   # fix sig
-  sed -i 's/NAME/$name/g' ~/.sig
-  sed -i 's/EMAIL/$email/g' ~/.sig
+  sed -i "s/NAME/$name/g" ~/.sig
+  sed -i "s/EMAIL/$email/g" ~/.sig
   echo "----> you may want to further edit the .sig file..."
   # fix muttrc
-  sed -i 's/EMAILHOSTNAME/$emailhostname/g' ~/.sig
+  sed -i "s/EMAILHOSTNAME/$emailhostname/g" ~/.sig
 fi
 
 echo ""
