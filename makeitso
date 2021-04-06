@@ -60,8 +60,11 @@ echo "you also might want i3 ssh-askpass feh redshift..."
 if askyn "run sudo apt-get install i3 ssh-askpass feh redshift?";
 then
   sudo apt-get install i3 ssh-askpass feh redshift
+  if [ ! -e ${HOME}/.i3 ] ; then
+    mkdir -p ~/.i3
+  fi
+  cprpl i3config ~/.i3/config
 fi
-echoline
 
 # bash
 echoline
@@ -138,7 +141,7 @@ if [ -e defaults ] ; then
   sed -i "s/EMAIL/$email/g" ~/.sig
   echo "----> you may want to further edit the .sig file..."
   # fix muttrc
-  sed -i "s/EMAILHOSTNAME/$emailhostname/g" ~/.sig
+  sed -i "s/EMAILHOSTNAME/$emailhostname/g" ~/.muttrc
 fi
 
 echo ""
