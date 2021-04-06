@@ -125,7 +125,7 @@ cprpl gitconfig ~/.gitconfig
 
 # if defaults file exists, fix the default name, username, etc
 echoline
-if [ ! -e defaults ] ; then
+if [ -e defaults ] ; then
   echo "found defaults file...fixing default stuff"
   name=`grep -w name defaults| awk -F: '{print $2}'`
   email=`grep -w email defaults| awk -F: '{print $2}'`
