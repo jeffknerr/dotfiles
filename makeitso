@@ -27,6 +27,7 @@ askyn () {
 cprpl () {
   src=$1
   dst=$2
+  echo ">>>> $src $dst"
   if [ -e $dst ] ; then
     if askyn "$dst already exists...replace it?";
     then
@@ -60,47 +61,40 @@ echo "you also might want i3 ssh-askpass feh redshift..."
 if askyn "run sudo apt-get install i3 ssh-askpass feh redshift?";
 then
   sudo apt-get install i3 ssh-askpass feh redshift
-  if [ ! -e ${HOME}/.i3 ] ; then
-    mkdir -p ~/.i3
-  fi
-  cprpl i3config ~/.i3/config
 fi
-
-# bash
+if [ ! -e ${HOME}/.i3 ] ; then
+  mkdir -p ~/.i3
+fi
 echoline
-cprpl bash_aliases ~/.bash_aliases
+cprpl i3config ~/.i3/config
 
 # check if ~/.oh-my-zsh already exists...
 echoline
 if [ ! -e ${HOME}/.oh-my-zsh ] ; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
-echoline
-cprpl zshrc ~/.zshrc
 if [ ! -e ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 fi
 echoline
 cprpl jkblinks.zsh-theme ~/.oh-my-zsh/themes/jkblinks.zsh-theme
 if [ ${SHELL} != "/usr/bin/zsh" ] ; then
-  echo "changing shell to zsh..."
-  chsh -s /usr/bin/zsh
+  if askyn "run chsh to change to zsh shell?";
+  then
+    echo "running chsh..."
+    chsh -s /usr/bin/zsh
+  fi
 fi
+
 # for jekyll stuff
 if [ ! -e ${HOME}/gems ] ; then
   mkdir ${HOME}/gems
 fi
 
-# python
-echoline
-cprpl pythonrc ~/.pythonrc
-
 # mutt
 if [ ! -e ${HOME}/mdir/tmp ] ; then
   mkdir -p ~/mdir/tmp
 fi
-echoline
-cprpl muttrc ~/.muttrc
 
 # ssh auth keys file
 if [ ! -e ${HOME}/.ssh ] ; then
@@ -109,22 +103,15 @@ fi
 echoline
 cprpl authorized_keys ${HOME}/.ssh/authorized_keys
 
-# vimrc, vim-plug
-echoline
-cprpl vimrc ~/.vimrc
-echo "might have to run :PlugInstall to get all the vim plugins"
-
-# tmux.conf
-echoline
-cprpl tmux.conf ~/.tmux.conf
-
-# signature file
-echoline
-cprpl sig ~/.sig
-
-# gitconfig file
-echoline
-cprpl gitconfig ~/.gitconfig
+# these all have the same syntax
+files=( zshrc gitconfig tmux.conf sig vimrc muttrc pythonrc bash_aliases )
+for f in "${files[@]}"
+do
+  echo $files
+  echoline
+  echo "$f ---------------"
+  cprpl ${f} ${HOME}/.${f}
+done
 
 # if defaults file exists, fix the default name, username, etc
 echoline
@@ -133,12 +120,16 @@ if [ -e defaults ] ; then
   name=`grep -w name defaults| awk -F: '{print $2}'`
   email=`grep -w email defaults| awk -F: '{print $2}'`
   emailhostname=`grep -w emailhostname defaults| awk -F: '{print $2}'`
+  phone=`grep -w phone defaults| awk -F: '{print $2}'`
+  title=`grep -w title defaults| awk -F: '{print $2}'`
   # fix gitconfig
   sed -i "s/NAME/$name/g" ~/.gitconfig
   sed -i "s/EMAIL/$email/g" ~/.gitconfig
   # fix sig
   sed -i "s/NAME/$name/g" ~/.sig
   sed -i "s/EMAIL/$email/g" ~/.sig
+  sed -i "s/PHONE/$phone/g" ~/.sig
+  sed -i "s/TITLE/$title/g" ~/.sig
   echo "----> you may want to further edit the .sig file..."
   # fix muttrc
   sed -i "s/EMAILHOSTNAME/$emailhostname/g" ~/.muttrc
