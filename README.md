@@ -11,13 +11,12 @@ other actions that might be needed:
 ```
 git clone git@github.com:jeffknerr/dotfiles.git
 cd dotfiles
-cp .defaults defaults
+cp .defaults defaults  # will customize .sig, .gitconfig, etc
 vim defaults
 ./makeitso
 ```
 
 ## TODO
 
-- sig customizations???
-- finish the script to install all of this
+- fix up vimrc file
 - *really* test it

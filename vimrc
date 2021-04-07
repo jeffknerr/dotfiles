@@ -32,6 +32,13 @@ vnoremap Q gq
 map <C-y> :noh<CR>:setlocal number!<CR>
 map <C-L> :noh<CR>:redraw!<CR>
 map <f9> :w<CR>:!python3 %<CR>
+imap ;kb <kbd></kbd><left><left><left><left><left><left>
+imap ;st <strong></strong><left><left><left><left><left><left><left><left><left>
+imap ;so System.out.println();<left><left>
+imap ;qq Keep going with the game, and let me know if you have any questions.
+syntax match nonascii "[^\x00-\x7F]"
+highlight nonascii guibg=Red ctermbg=2
+"
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
 set noswapfile
 set wildmenu
@@ -59,6 +66,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
+Plug 'preservim/nerdtree'
 Plug 'dense-analysis/ale'
 Plug 'franbach/miramare'
 Plug 'itchyny/lightline.vim'
@@ -66,6 +74,8 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_fixers = {'javascript': ['prettier'],'css': ['prettier'],}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-n> :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " important!!
 set termguicolors

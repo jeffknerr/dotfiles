@@ -27,7 +27,7 @@ askyn () {
 cprpl () {
   src=$1
   dst=$2
-  echo ">>>> $src $dst"
+  echo ">>>> $dst"
   if [ -e $dst ] ; then
     if askyn "$dst already exists...replace it?";
     then
@@ -107,9 +107,7 @@ cprpl authorized_keys ${HOME}/.ssh/authorized_keys
 files=( zshrc gitconfig tmux.conf sig vimrc muttrc pythonrc bash_aliases )
 for f in "${files[@]}"
 do
-  echo $files
   echoline
-  echo "$f ---------------"
   cprpl ${f} ${HOME}/.${f}
 done
 
