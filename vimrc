@@ -1,15 +1,44 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " .vimrc file
 "
-set pastetoggle=<F2>
-set history=50
-set viminfo=/10,'10,r/mnt/zip,r/mnt/floppy,f0,h,\"100
-set showmode
-set showcmd
-set shiftwidth=4
-set shiftround
-set expandtab
 set autoindent
+set expandtab
+set gdefault
+set history=50
+set hlsearch
+set ignorecase
+set incsearch
+set list
+"set listchars=tab:→→,eol:¬,space:.
+set listchars=tab:→→
+set matchpairs+=<:>
+set nocompatible
+set noswapfile
+set number
+set pastetoggle=<F2>
+set shiftround
+set shiftwidth=4
+set showcmd
+set showmode
+set smartcase
+set viminfo=/15,'15,r/mnt/zip,r/mnt/floppy,f1,h,\"100
+set whichwrap=h,l,~,[,]
+set wildmenu
+nnoremap <F6> <C-W>w
+nnoremap <S-F6> <C-W>W
+nnoremap Q gqap 
+vnoremap Q gq 
+map <C-y> :noh<CR>:setlocal number!<CR>
+map <C-C> :set cursorline!<CR>:set cursorcolumn!<CR>
+map <C-L> :noh<CR>:redraw!<CR>
+map <f9> :w<CR>:!python3 %<CR>
+map <C-n> :NERDTreeToggle<CR>
+imap ;kb <kbd></kbd><left><left><left><left><left><left>
+imap ;st <strong></strong><left><left><left><left><left><left><left><left><left>
+imap ;so System.out.println();<left><left>
+imap ;qq Keep going with the game, and let me know if you have any questions.
+syntax match nonascii "[^\x00-\x7F]"
+highlight nonascii guibg=Red ctermbg=2
 filetype on
 filetype indent on
 filetype plugin on
@@ -19,33 +48,7 @@ autocmd FileType perl set smartindent
 autocmd FileType html set formatoptions+=tl
 autocmd FileType html,css set noexpandtab tabstop=2
 autocmd FileType make set noexpandtab shiftwidth=8
-set ignorecase
-set smartcase
-set gdefault
-set whichwrap=h,l,~,[,]
-nnoremap <F6> <C-W>w
-nnoremap <S-F6> <C-W>W
-set matchpairs+=<:>
-nnoremap Q gqap 
-vnoremap Q gq 
-" Cntl-y toggles line numbers
-map <C-y> :noh<CR>:setlocal number!<CR>
-map <C-L> :noh<CR>:redraw!<CR>
-map <f9> :w<CR>:!python3 %<CR>
-imap ;kb <kbd></kbd><left><left><left><left><left><left>
-imap ;st <strong></strong><left><left><left><left><left><left><left><left><left>
-imap ;so System.out.println();<left><left>
-imap ;qq Keep going with the game, and let me know if you have any questions.
-syntax match nonascii "[^\x00-\x7F]"
-highlight nonascii guibg=Red ctermbg=2
-"
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
-set noswapfile
-set wildmenu
-set number
-set list
-"set listchars=tab:→→,eol:¬,space:.
-set listchars=tab:→→
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " https://github.com/tmux/tmux/issues/1246 tmux color fix
 if exists('+termguicolors')
@@ -65,27 +68,17 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 call plug#begin('~/.vim/plugged')
-Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdtree'
-Plug 'dense-analysis/ale'
 Plug 'franbach/miramare'
 Plug 'itchyny/lightline.vim'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 call plug#end()
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ale_fixers = {'javascript': ['prettier'],'css': ['prettier'],}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-n> :NERDTreeToggle<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" important!!
+" show the status bar
+set laststatus=2
 set termguicolors
 
 " the configuration options should be placed before `colorscheme miramare`
 let g:miramare_enable_italic = 1
 let g:miramare_disable_italic_comment = 1
-
 colorscheme miramare
 " https://github.com/franbach/miramare
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set laststatus=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
