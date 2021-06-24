@@ -110,6 +110,7 @@ do
   echoline
   cprpl ${f} ${HOME}/.${f}
 done
+touch ${HOME}/.python_history
 
 # if defaults file exists, fix the default name, username, etc
 echoline
