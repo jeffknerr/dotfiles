@@ -56,6 +56,7 @@ function cl {
 }
 function bcu { sudo -H -i -u $1; }
 function hcs { host 130.58.68.$1; }
+function h89 { host 130.58.89.$1; }
 function mp4 { mpage -4f  $1 | lp; }
 function mp2 { mpage -2f $1 | lp; }
 function pdiary { mutt -R -f /usr/swat/staff/diary/$1; }
