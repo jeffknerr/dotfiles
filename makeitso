@@ -1,8 +1,14 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # install the dot files and packages needed
 # J. Knerr
 # April 2021
+
+# todo:
+# - add apt vs pkg_install (openbsd) vs ???
+# - add chsh zsh locations (openbsd in /usr/local)
+# - zsh-syntax-highlighting location on openbsd
+
 
 export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/sbin
 
@@ -104,13 +110,20 @@ echoline
 cprpl authorized_keys ${HOME}/.ssh/authorized_keys
 
 # these all have the same syntax
-files=( zshrc gitconfig tmux.conf sig vimrc muttrc pythonrc bash_aliases )
+files=( zshrc gitconfig tmux.conf sig vimrc muttrc pythonrc bash_aliases p10k.zsh )
 for f in "${files[@]}"
 do
   echoline
   cprpl ${f} ${HOME}/.${f}
 done
 touch ${HOME}/.python_history
+
+# check if ~/.oh-my-zsh/custom/themes/powerlevel10k exists
+echoline
+if [ ! -e ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k ] ; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+fi
+echoline
 
 # if defaults file exists, fix the default name, username, etc
 echoline
