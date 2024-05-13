@@ -1,0 +1,27 @@
+#! /bin/sh
+
+# set up (or just edit) todo list for today
+
+export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/sbin
+
+d=`date +'%Y-%m-%d'`
+echo "today is $d"
+ddir="/home/knerr/Documents/notebooks/dates"
+df=$ddir"/"$d
+sleep 1
+
+# if it does not exist yet, copy from most recent list
+if [ ! -e $df ] ; then 
+  td=`date +'%a %b %d, %Y'`  # Thu Nov 12, 2021
+  last=`ls -lrt $ddir/20* | tail -1 | awk '{print $9}'`
+  # mostrecent=$ddir"/"$last
+  mostrecent=$last
+  echo "" > $df
+  echo "" >> $df
+  echo $td >> $df
+  cat $mostrecent >> $df
+fi 
+
+vim $df
+
+exit 0
